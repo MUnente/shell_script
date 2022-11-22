@@ -30,5 +30,11 @@ cp /etc/fstab /etc/fstab.default
 cat ./fstab > /etc/fstab
 # mv ./fstab /etc/fstab
 
+echo "Modificando o arquivo SELINUX para disabled e rebootando a máquina"
+cat ./config > /etc/selinux/config
+
 echo "Script executado com sucesso!"
+
+echo "Rebooting..."
+reboot
 

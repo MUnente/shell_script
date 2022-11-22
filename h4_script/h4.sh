@@ -40,8 +40,21 @@ echo "Liberando o acesso à porta do servidor HTTP no firewall"
 firewall-cmd --permanent --add-service=nfs
 firewall-cmd --reload
 
-echo "Movendo arquivo index para pasta compartilhada"
-mv ./index.html /dados/shared
+echo "Criando arquivo index na pasta compartilhada"
+cat <<-END >/dados/shared/index.html
+<html>
+<body>Test Site - $(hostname)</body>
+</html>
+END
+
+# echo "Movendo arquivo index para pasta compartilhada"
+# mv ./index.html /dados/shared
+
+echo "Modificando o arquivo SELINUX para disabled e rebootando a máquina"
+cat ./config > /etc/selinux/config
 
 echo "Script executado com sucesso!"
+
+echo "Rebooting..."
+reboot
 

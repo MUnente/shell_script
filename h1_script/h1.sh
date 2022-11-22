@@ -27,5 +27,11 @@ echo "Liberando o acesso à porta do servidor HTTP no firewall"
 firewall-cmd --permanent --add-service=http
 firewall-cmd --reload
 
+echo "Modificando o arquivo SELINUX para disabled e rebootando a máquina"
+cat ./config > /etc/selinux/config
+
 echo "Script executado com sucesso!"
+
+echo "Rebooting..."
+reboot
 
